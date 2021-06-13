@@ -345,9 +345,8 @@ The event_steps file contains the steps that need to be followed for that partic
    }
  }
 }
-
-    </code>
-  </pre>
+  </code>
+</pre>
 </section>
 
 
