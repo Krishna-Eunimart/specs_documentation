@@ -229,6 +229,15 @@ The event_steps file contains the steps that need to be followed for that partic
 
   <strong>request:</strong>  the request contains all the host, url endpoint, api request method, protocol and also headers, params and body information.
 </p>
+<p>
+  Before going further we need to know about other files. I.e config_data.json so, let’s see what this config_data is all about.
+</p>
+
+<section>
+  <p>
+    Sometimes for making requests we need some pieces of data which are private. Like api keys, access tokens not only those we also use different servers for different environments. For suppose, In testing we might use a different host name and on production we use different host and also AWS S3 bucket info all this information is stored in the config_data file. So, when making any request if we need that information we refer to that config file and get that information.
+  </p>
+</section>
 
 
 
