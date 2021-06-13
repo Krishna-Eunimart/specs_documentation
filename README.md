@@ -234,9 +234,120 @@ The event_steps file contains the steps that need to be followed for that partic
 </p>
 
 <section>
+  <h2>Config_data</h2>
   <p>
     Sometimes for making requests we need some pieces of data which are private. Like api keys, access tokens not only those we also use different servers for different environments. For suppose, In testing we might use a different host name and on production we use different host and also AWS S3 bucket info all this information is stored in the config_data file. So, when making any request if we need that information we refer to that config file and get that information.
   </p>
+  <img/>
+  <p>
+    This is the basic config_data file which contains host information and some private information like dev_credentials and S3 information. Lets see how to write a simple spec file for making a get request for shopify products.
+  </p>
+  <h3>Example</h3>
+  <pre>
+    <code>
+{
+ "data": {
+   "name": "marketplace.get.shopify.products",
+   "event_type": "api_call",
+   "description": "get shopify marketplace products.",
+   "parameters": {
+     "properties": {
+       "host": {
+         "ref": "config_data/marketplace_host"
+       },
+       "app_key": {
+         "ref": "config_data/dev_credentials/app_key"
+       },
+       "app_secret": {
+         "default_value": "config_data/dev_credentials/app_secret"
+       },
+       "client_secret": {
+         "default_value": "outputs/webstore.get.shopify.get_api_keys/access_token"
+       }
+     }
+   },
+   "outputs": {
+     "success": {
+       "properties": {
+         "products": {
+           "ref": "response/data/orders"
+         }
+       }
+     },
+     "error": {
+       "properties": {
+         "error_code": {
+           "ref": "response"
+         }
+       }
+     }
+   },
+   "response": {
+     "conversion": {
+       "required": false,
+       "type": ""
+     },
+     "conditions": {
+       "success": {
+         "fn::equal": [
+           {
+             "variable": {
+               "ref": "response/code"
+             }
+           },
+           {
+             "value": {
+               "default_value": "200"
+             }
+           }
+         ]
+       },
+       "error": {}
+     }
+   },
+   "request_configuration": {
+     "type": "single_request"
+   },
+   "request": {
+     "properties": {
+       "http_protocal": {
+         "default_value": "https"
+       },
+       "host": {
+         "ref": "parameters/host"
+       },
+       "path": {
+         "default_value": "/admin/api/2021-04/products.json"
+       },
+       "method": {
+         "default_value": "GET"
+       },
+       "params": {
+         "type": "object",
+         "properties": {
+           "limit": {
+             "default_value": "10"
+           }
+         }
+       },
+       "headers": {
+         "type": "object",
+         "properties": {
+           "Content-Type": {
+             "default_value": "application/json"
+           },
+           "X-Shopify-Access-Token": {
+             "ref": "parameters/client_secret"
+           }
+         }
+       }
+     }
+   }
+ }
+}
+
+    </code>
+  </pre>
 </section>
 
 
