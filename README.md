@@ -238,7 +238,7 @@ The event_steps file contains the steps that need to be followed for that partic
   <p>
     Sometimes for making requests we need some pieces of data which are private. Like api keys, access tokens not only those we also use different servers for different environments. For suppose, In testing we might use a different host name and on production we use different host and also AWS S3 bucket info all this information is stored in the config_data file. So, when making any request if we need that information we refer to that config file and get that information.
   </p>
-  <img/>
+  <img src = "https://github.com/Krishna-Eunimart/specs_documentation/blob/main/data/config.png" alt="config img"/>
   <p>
     This is the basic config_data file which contains host information and some private information like dev_credentials and S3 information. Lets see how to write a simple spec file for making a get request for shopify products.
   </p>
