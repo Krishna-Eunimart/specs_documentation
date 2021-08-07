@@ -55,7 +55,7 @@ The event_steps file contains the steps that need to be followed for that partic
            "event_key": "if success specify the next event here"
          },
          "error": {
-           "event_key": "notification.error.message"
+           "event_key": "notification.error_message"
          }
        }
      }
